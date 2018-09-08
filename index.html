@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todolist Menengah + LocalStorage + Array</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body class="background">
+    <div class="container">
+        <h1 class="marginH1">TODO LIST</h1>
+    </div>
+
+    <div class="container">
+        <input id="input" placeholder="Tulis Rencanamu Hari ini..." type="text">
+        <span id="button-kirim" onclick="kirim()" type="button" class="addBtn btn btn-warning">add</span>
+        <span id="button-reset" onclick="resett()" type="button" class="addBtn btn btn-danger">reset</span>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <ul id="listUL" class="list-group list-group-flush no-line">
+
+        </ul>
+    </div>
+
+    <script>
+        var todos = [];
+        var statusChecked = [];
+        const inputDOM = document.getElementById('input');
+        const listULDOM = document.getElementById('listUL');
+        var dataStorage = localStorage.getItem('todos');
+        const litagDom = document.getElementsByTagName('li');
+
+        
+        function getDataStorage() {
+            if (dataStorage === null) {
+                dataStorage = [];
+            }
+            else {
+                todos = JSON.parse(dataStorage);
+                // console.log(todos);
+                tambah();
+            }
+        }
+        getDataStorage();
+
+
+
+
+        function kirim() {
+            if (inputDOM.value === "") {
+                alert('Tulis Rencanamu Hari ini...');
+            }
+            else {
+                const valueInput = inputDOM.value;
+                todos.push(valueInput);
+                localStorage.setItem("todos", JSON.stringify(todos));
+                inputDOM.value = "";
+                listULDOM.innerHTML = "";
+                tambah();
+            }
+        }
+
+
+        function tambah() {
+            var index = 0;
+            while (index < todos.length) {
+                listULDOM.innerHTML += '<li class="list-group-item transparan"><span><input type="checkbox" class="cekboxs" onclick="lineThrough()" name="cekbox"  style="margin-right: 5px"></span>' + todos[index] + '<span type="button" onclick="hapus(' + index + ')" class="btn-close">X</span></li>';
+                index++;
+            }
+            setChecked();
+        }
+
+        function resett() {
+            localStorage.clear();
+            listULDOM.innerHTML = '';
+            inputDOM.value = "";
+            todos = [];
+            statusChecked = [];
+        }
+
+        inputDOM.addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("button-kirim").click();
+            }
+        });
+
+        function hapus(a) {
+            // console.log("1 = " + todos);
+            // console.log("statusCheckedhapusawal  jadi = " + statusChecked);
+            todos.splice(a, 1);
+            statusChecked.splice(a, 1);
+            // localStorage.removeItem("list" + a + "");
+            localStorage.setItem("todos", JSON.stringify(todos));
+            localStorage.setItem("statusChecked", JSON.stringify(statusChecked));
+            // lineThrough();
+            // listULDOM.removeChild(listULDOM.childNodes[a]);
+            // console.log("todos jadi = " + todos);
+            // console.log("statusCheckedhapusakhir  jadi = " + statusChecked);
+            listULDOM.innerHTML = "";
+            tambah();
+        }
+
+
+        function lineThrough() {
+            statusChecked = [];
+            var cekboxDOM = document.getElementsByName('cekbox');
+            for (var i = 0; i < cekboxDOM.length; i++) {
+                if (cekboxDOM[i].checked) {
+                    litagDom[i].style.textDecoration = "line-through";
+                    statusChecked.push(cekboxDOM[i].checked);
+                    // console.log('apakah checkBox ' + i + ' dicontreng? = ' + cekboxDOM[i].checked);
+                    // localStorage.setItem("list" + i + "", JSON.stringify(cekboxDOM[i].checked));
+                }
+                else {
+                    litagDom[i].style.textDecoration = "none";
+                    statusChecked.push(cekboxDOM[i].checked);
+                    // console.log('apakah checkBox ' + i + ' dicontreng? = ' + cekboxDOM[i].checked);
+                    // localStorage.setItem("list" + i + "", JSON.stringify(cekboxDOM[i].checked));
+
+                }
+            }
+            localStorage.setItem("statusChecked", JSON.stringify(statusChecked));
+            // console.log("statusCheckedthrought = " + statusChecked);
+        }
+
+        function setChecked() {
+            var cekboxsDOM = document.getElementsByClassName('cekboxs');
+            var statusCheckedDOM = localStorage.getItem("statusChecked");
+            if (statusCheckedDOM === null) {
+                statusCheckedDOM = JSON.parse(statusCheckedDOM);
+                statusCheckedDOM = [];
+            }
+            else {
+                statusCheckedDOM = JSON.parse(statusCheckedDOM);
+            }
+            var b = 0;
+            while (b < cekboxsDOM.length) {
+                // console.log(b);
+                // console.log(statusCheckedDOM);
+                if (statusCheckedDOM[b] === true) {
+                    // console.log("Status list" + b + "adalah true");
+                    cekboxsDOM[b].checked = true;
+                    // console.log("a");
+
+                    b++;
+                }
+                else {
+                    // console.log("Status list" +b+ "adalah false");
+                    b++;
+                }
+
+            }
+            lineThrough();
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

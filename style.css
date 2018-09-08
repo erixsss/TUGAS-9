@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+html, body {
+    height: 100%;
+}
+
+.background {
+    background-image: url('image/background.jpg');
+    background-color: #FFF;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #FFF;
+    /* text-align: center; */
+}
+
+.transparan {
+    background-color: transparent;
+    border-color: #FFF;
+}
+#input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+    
+  }
+  .addBtn {
+    padding: 10px;
+    width: 12.5%;
+    /* background: #d9d9d9; */
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+  }  
+
+  .marginH1 {
+    margin-top: 3.5rem;
+    margin-bottom: 3.5rem;
+    text-align: center;
+  }
+
+  .btn-close {
+      width: 5%;
+      float: right;
+      text-align: center;
+      color: black;
+  }
+  .no-line {
+      text-decoration-style: solid;
+  }
+
+  /* input[type="checkbox"][checked]{text-decoration:line-through}; */
