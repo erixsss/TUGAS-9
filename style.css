@@ -14,7 +14,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
-  /* text-align: center; */
 }
 
 .transparan {
@@ -33,7 +32,6 @@ body {
 .addBtn {
   padding: 10px;
   width: 12.5%;
-  /* background: #d9d9d9; */
   color: #555;
   float: left;
   text-align: center;
@@ -58,5 +56,3 @@ body {
 .no-line {
   text-decoration-style: solid;
 }
-
-/* input[type="checkbox"][checked]{text-decoration:line-through}; */

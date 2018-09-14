@@ -43,15 +43,10 @@
             }
             else {
                 todos = JSON.parse(dataStorage);
-                // console.log(todos);
                 tambah();
             }
         }
         getDataStorage();
-
-
-
-
         function kirim() {
             if (inputDOM.value === "") {
                 alert('Tulis Rencanamu Hari ini...');
@@ -65,7 +60,6 @@
                 tambah();
             }
         }
-
 
         function tambah() {
             var index = 0;
@@ -92,21 +86,13 @@
         });
 
         function hapus(a) {
-            // console.log("1 = " + todos);
-            // console.log("statusCheckedhapusawal  jadi = " + statusChecked);
             todos.splice(a, 1);
             statusChecked.splice(a, 1);
-            // localStorage.removeItem("list" + a + "");
             localStorage.setItem("todos", JSON.stringify(todos));
             localStorage.setItem("statusChecked", JSON.stringify(statusChecked));
-            // lineThrough();
-            // listULDOM.removeChild(listULDOM.childNodes[a]);
-            // console.log("todos jadi = " + todos);
-            // console.log("statusCheckedhapusakhir  jadi = " + statusChecked);
             listULDOM.innerHTML = "";
             tambah();
         }
-
 
         function lineThrough() {
             statusChecked = [];
@@ -115,19 +101,13 @@
                 if (cekboxDOM[i].checked) {
                     litagDom[i].style.textDecoration = "line-through";
                     statusChecked.push(cekboxDOM[i].checked);
-                    // console.log('apakah checkBox ' + i + ' dicontreng? = ' + cekboxDOM[i].checked);
-                    // localStorage.setItem("list" + i + "", JSON.stringify(cekboxDOM[i].checked));
                 }
                 else {
                     litagDom[i].style.textDecoration = "none";
                     statusChecked.push(cekboxDOM[i].checked);
-                    // console.log('apakah checkBox ' + i + ' dicontreng? = ' + cekboxDOM[i].checked);
-                    // localStorage.setItem("list" + i + "", JSON.stringify(cekboxDOM[i].checked));
-
                 }
             }
             localStorage.setItem("statusChecked", JSON.stringify(statusChecked));
-            // console.log("statusCheckedthrought = " + statusChecked);
         }
 
         function setChecked() {
@@ -142,25 +122,17 @@
             }
             var b = 0;
             while (b < cekboxsDOM.length) {
-                // console.log(b);
-                // console.log(statusCheckedDOM);
                 if (statusCheckedDOM[b] === true) {
-                    // console.log("Status list" + b + "adalah true");
                     cekboxsDOM[b].checked = true;
-                    // console.log("a");
-
                     b++;
                 }
                 else {
-                    // console.log("Status list" +b+ "adalah false");
                     b++;
                 }
 
             }
             lineThrough();
         }
-
-
     </script>
 
 
